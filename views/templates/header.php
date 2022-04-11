@@ -14,12 +14,12 @@
 
 <body>
 <nav class="navbar navbar-expand-sm navbar-light bg-light"id="test">
-    <a class="navbar-brand" href=""><img class="bordered" src="/public/assets/img/icons8-stetoscope-icon-64.png">CLINIQUE JACOBINS</a>
+    <a class="navbar-brand" href=""><img class="ms-3"src="/public/assets/img/icons8-stetoscope-icon-64.png">CLINIQUE JACOBINS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"> </span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto me-4 fs-5">
             <li class="nav-item">
                 <a class="nav-link" href="">Ajout patient</a>
             </li>

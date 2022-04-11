@@ -9,7 +9,6 @@
 }
 
 main {
-  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,11 +17,10 @@ main {
 
 .form  {
   background: var(--color-2);
-  width: 800px;
   padding: 20px;
   border-radius: 2rem;
   box-shadow: 0 1px 10px 0 rgba(0,0,0,0.1);  
-  margin: 10px;
+  margin: 20px;
   transition: .60s ease-in;
 }
 

@@ -1,7 +1,7 @@
 <main>
-    <div class="container">
+    <div class="container ">
         <div class="row">
-            <div class="col-6 offset-3">
+            <div class="col-sm-12">
                 <div class="form">
                     <form action="<?=htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post"enctype="multipart/form-data" >
                         <div class="form-title">
