@@ -1,7 +1,7 @@
 <main>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-6 offset-3">
                 <div class="form">
                     <form action="<?=htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post"enctype="multipart/form-data" >
                         <div class="form-title">
@@ -24,7 +24,7 @@
                         min="1900-01-01" max="2015-12-31">  
                         <p class="error"><?= $error['date'] ?? '' ?></p>
                         </div> 
-                        <div class="m-3">
+                        <div class="form-group">
                             <label for="phone" class="form-label">Numéro de téléphone *</label>
                             <input type="number" class="form-control" name="phone" id="phone" placeholder="N°de téléphone" required pattern="<?=REGEX_PHONE?>">
                             <p class="error"><?= $error['phone'] ?? ''?></p>

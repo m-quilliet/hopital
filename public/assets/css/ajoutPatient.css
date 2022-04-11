@@ -1,10 +1,11 @@
+/*header*/
 
 :root {
-  --color-1: #1f8a92;
-  --color-2: #e8edec;
-  --color-3: #071580;
-  --color-4: #073a4d;
-  --color-5: #ffc43d;
+  --color-1: #052548;
+  --color-2: #EBEEF3;
+  --color-3: #34495E;
+  --color-4: #BD965B;
+
 }
 
 main {
@@ -12,13 +13,13 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
 } 
 
 .form  {
   background: var(--color-2);
   width: 800px;
-  padding: 30px;
+  padding: 20px;
   border-radius: 2rem;
   box-shadow: 0 1px 10px 0 rgba(0,0,0,0.1);  
   margin: 10px;
@@ -51,6 +52,7 @@ main {
 
 .form .form-group {
   padding: 20px 0;
+
 }
 
 .form .form-group label {
@@ -73,6 +75,9 @@ input[type="password"] {
   border-radius: 10px;
   display:block;
   width:100%;
+}
+.from-label{
+  font-size: 16px;
 }
 
 button {

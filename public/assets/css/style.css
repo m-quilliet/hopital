@@ -1,4 +1,9 @@
 #test{
-    background-color: blue;
-    color:crimson;
+    background-color:#34495E !important;    
+}
+.navbar-brand{
+    color:#BD965B !important;
+}
+.nav-link{
+    color:#BD965B !important;
 }
