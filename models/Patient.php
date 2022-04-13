@@ -34,7 +34,7 @@ class Patient{
     $this-> setBirthdate($birthdate);
     $this-> setPhone($phone);
     $this-> setMail($mail);
-    $this-> _pdo=dbConnect();// car fait un return ds database
+    $this-> _pdo=Database::dbConnect();// car fait un return ds database
     }
 
 
@@ -87,27 +87,50 @@ class Patient{
 //$this= classe ds laquelle tu es.... dans la classe en cours
 
 // methode pr faire appel a l'ext de la classe pour inserer les données
-    public function add(){
-       //insérer une requetes sql        
-        $sql="  INSERT INTO `patients`(`lastname`, `firstname`, `birthdate`, `phone`, `mail`) 
-                VALUES (:lastname,:firstname,:birthdate,:phone,:mail)";
-                $sth=$this->_pdo->prepare($sql);//->query va exécuter la requete // nous on veux réparer la requéte en vue de lui affecter des valeurs derrrieres
-                $sth=$this->_pdo->prepare($sql);
-                $sth-> binValue(':lastname',$this->getLastname(),PDO::PARAM_STR); // méthode pdo statement 
-                //binvalue=
-                //methode pdo statment
+    public function add():bool {
+        try{
+       //insérer une requetes sql   
+        $sth=$this->_pdo->prepare(//->query va exécuter la requete // nous on veux réparer la requéte en vue de lui affecter des valeurs derrrieres     
+        "INSERT INTO `patients`(`lastname`, `firstname`, `birthdate`, `phone`, `mail`) 
+                VALUES (:lastname,:firstname,:birthdate,:phone,:mail)"
+                );
+            
+                $sth-> bindValue(':lastname',$this->getLastname(),PDO::PARAM_STR); // méthode pdo statement 
          //methode query qui retourne un objet de type pdo statment =appeler $sth (qui permet d'accéder à des methodes pdo statment)
          //:lastname= marqueur nomminatif avec ces marqueurs = on prepare,on binValue et on execute
-                $sth-> binValue(':firstname',$this->getFirstname(),PDO::PARAM_STR);
-                $sth-> binValue(':birthdate',$this->getBirthdate(),PDO::PARAM_STR);
-                $sth-> binValue(':phone',$this->getPhone(),PDO::PARAM_STR);
-                $sth-> binValue(':mail',$this->getMail(),PDO::PARAM_STR);//shift alt fléche bas pr dupliquer
+                $sth-> bindValue(':firstname',$this->getFirstname(),PDO::PARAM_STR);
+                $sth-> bindValue(':birthdate',$this->getBirthdate(),PDO::PARAM_STR);
+                $sth-> bindValue(':phone',$this->getPhone(),PDO::PARAM_STR);
+                $sth-> bindValue(':mail',$this->getMail(),PDO::PARAM_STR);//shift alt fléche bas pr dupliquer
 
-                if($sth->execute()){//pas besoin de paramétre; requete sera exécuter à ce moment là
-                return true;
-                } else {
-                return false;
-                }
+               //pas besoin de paramétre; requete sera exécuter à ce moment là
+                return $sth->execute(); // retourne excécution de cette requete et va retoirner true ou false
+
+        }catch (PDOException $e){
+            return false;
+        }
+    }
+        public static function isExist(string $mail):bool{
+        try{
+            $sql='SELECT `mail`
+                FROM `patients`
+                WHERE `mail`=:mail';
+            $sth= Database::dbConnect()->prepare($sql);
+            $sth->bindValue(':mail',$mail, PDO::PARAM_STR);
+            $sth->execute();
+            if(empty($sth->fetchAll())){//si tableau vite retourne existe pas
+                return false; // patiet n'existe pas
+            } else{
+                return true;// si ok on repasse ds la catch (?)
+            }
+
+        }catch (PDOException $e){
+            return false;
+        }
+    }
+}
+
+
                 
 
 
@@ -118,8 +141,7 @@ class Patient{
 
         
 
-    }
-}
+
 
 
 

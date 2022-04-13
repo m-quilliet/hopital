@@ -11,6 +11,7 @@ $error=[];
 
 
 if($_SERVER['REQUEST_METHOD']=='POST'){ 
+    
      //-si formuliare envoyé en post on va faire des choses 
 
      //-- verifier lastname --
@@ -27,7 +28,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $error['lastname']= 'Veuillez saisir un nom de famille valide .';
         }
     }
-
+    
+ 
      //-- verifier firstname --
     $firstname= filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS);
     if(empty($firstname)){
@@ -59,7 +61,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $error['birthdate']= 'Veuillez saisir une date de naissance valide .';
         }
     }
-
+ 
     //--verifier phone --
     $phone= filter_input(INPUT_POST,'phone',FILTER_SANITIZE_NUMBER_INT);//-+ chiffre
     if(!empty($phone))//pas de else car pas obligatoire en front qd pas"required"{
@@ -71,39 +73,44 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         if($checkPhone=== false){
             $error['phone']= 'Veuillez saisir un numéro de téléphone valide.';
         }
-    
+
     
     $mail= trim(filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL));//trim retirer les espaces
+
     if(empty($mail)){//si variable mail est valide on va stocker ds tableau d'error à la clé mail mail=veuiillez remplir le champ
-        $error['mail']= ' Veuillez saisir votre email .';
+        $error['mail']=" Veuillez renseigner votre email.";
     }else{
-        $checkMail= filter_var (
-            $mail,
-            FILTER_VALIDATE_EMAIL,//valide la variable mail nettoyé
-        );
-            if($checkMail=== false){//=== verifier bien bolean qui soit false
-            $error['mail']= 'Veuillez saisir un email valide .';//alimenter le tableau d'erreu
-        }
-    
+        $checkMail= filter_var($mail,FILTER_VALIDATE_EMAIL);
     }
-    
 
-
+    if ($checktMail===false){
+        $error['mail']= 'Veuillez saisir un mail valide';  
+    }
+    // var_dump('coucou');
+    // die;
+    if (Patient::isExist($mail)) {
+        $error['mail']= 'L\'adresse mail existe déjà.';    
+    }
+    // var_dump('coucou');
+    // die;
 //-si pas erreur alors on enregistre en base car nettoyer et envoyer en post
     if(empty($error)){
+
         $patient=new Patient($lastname,$firstname,$birthdate,$phone,$mail);//hydrater notre objet
-    //apres avoir hydrater le patient on execute la méthode 
+
+        //apres avoir hydrater le patient on execute la méthode 
     //si bien ajouter en base de donnée je lui indique le message auqual j'ajoute une classe pr s'affichde tel ou tel couleur
-        if ($patient->add()) {
-        $error['addPatient']='Le patient est bien enregistré.';
-        $className['addPatient']='sucess';
-        } else { //indique erreur et affiche message et couleur erreur
-            $error['addPatient']='Une erreur est survenue, vous n\'étes pas enregistrer.';
+        $addedPatient= $patient->add();
+
+        if ($addedPatient=== false){
+            $error['addPatient']="Les données n'ont pas été envoyé en base de donnee";
             $className['addPatient']='error';
+        }else{
+
+            $error['addPatient']=" Les données sont envoyé avec succés dans la base de données";
+            $className['addPatient']='sucess';
         }
-        //si on passe ds la condition logiquement on a une nouvelle valeur ds la base de donnée
     }
-    
 }
 
 

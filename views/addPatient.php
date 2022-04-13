@@ -6,7 +6,7 @@
                     <form action="<?=htmlspecialchars($_SERVER['PHP_SELF'])//permet de renseigner ds la meme page tt en encodant les caratéres speciaux ds un soucis de sécurite?>" method="POST" >
                         <div class="form-title">
                             <span>Ajout Patient</span>
-                            <p class="error <?=$className['addPatient'] ?? ''?>"><?=$error['addPatient'] ?? ''?></p>
+                            <p class="<?=$className['addPatient'] ?>"><?=$error['addPatient'] ?? ''?></p>
                         </div>
                         <!-- for et id meme orthographe que nos attributs -->
                         <div class="form-group">
