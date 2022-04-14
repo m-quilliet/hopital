@@ -3,8 +3,7 @@ require_once(dirname(__FILE__).'/../config/config.php');
 
 class Database// pas besoin d'hydrater donc on va crreé méthode sttatique ms besoin de new database
 {
-    public static function dbConnect(): object 
-    {
+    public static function dbConnect(): object{
         try {
         $pdo= new PDO(DSN, USER, PASSWORD,[
         PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
@@ -12,8 +11,8 @@ class Database// pas besoin d'hydrater donc on va crreé méthode sttatique ms b
         ]);
         } 
         catch (PDOException $e){
-            $error= $e->getMessage();
-            echo $error;
+            header('location: /controllers/errorController.php?error=1');
+            die;//pr rediriger sur une page erreur
         }
         return $pdo;
     }

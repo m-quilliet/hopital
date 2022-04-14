@@ -21,10 +21,10 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul class="navbar-nav ms-auto me-4 fs-5">
             <li class="nav-item">
-                <a class="nav-link" href="">Ajout patient</a>
+                <a class="nav-link" href="/controllers/addPatientController.php">Ajout patient</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Liste patient</a>
+                <a class="nav-link" href="/controllers/listPatientController.php">Liste patient</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">A</a>

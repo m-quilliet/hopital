@@ -28,7 +28,7 @@ class Patient{
      * @param string $phone
      * @param string $mail
      */
-    public function __construct(string $lastname,string $firstname,string $birthdate,string $phone,string $mail){// utilise le setter paramétre d'entree
+    public function __construct(string $lastname='',string $firstname='',string $birthdate='',string $phone='',string $mail=''){// utilise le setter paramétre d'entree
     $this-> setLastname($lastname);// hydrate notre objet
     $this-> setFirstname($firstname); //affecte $firstname à l'attriburt fisrtname
     $this-> setBirthdate($birthdate);
@@ -96,7 +96,7 @@ class Patient{
                 );
             
                 $sth-> bindValue(':lastname',$this->getLastname(),PDO::PARAM_STR); // méthode pdo statement 
-         //methode query qui retourne un objet de type pdo statment =appeler $sth (qui permet d'accéder à des methodes pdo statment)
+         //methode query (juste recuperer de la donnée) qui retourne un objet de type pdo statment =appeler $sth (qui permet d'accéder à des methodes pdo statment)
          //:lastname= marqueur nomminatif avec ces marqueurs = on prepare,on binValue et on execute
                 $sth-> bindValue(':firstname',$this->getFirstname(),PDO::PARAM_STR);
                 $sth-> bindValue(':birthdate',$this->getBirthdate(),PDO::PARAM_STR);
@@ -118,14 +118,25 @@ class Patient{
             $sth= Database::dbConnect()->prepare($sql);
             $sth->bindValue(':mail',$mail, PDO::PARAM_STR);
             $sth->execute();
+
             if(empty($sth->fetchAll())){//si tableau vite retourne existe pas
                 return false; // patiet n'existe pas
             } else{
                 return true;// si ok on repasse ds la catch (?)
             }
-
         }catch (PDOException $e){
             return false;
+        }
+    }
+    public function listPatient():array{
+        try{
+            $sql="SELECT * FROM patients";
+            $sth= Database::dbConnect()->query($sql);
+            $listPatients=$sth->fetchAll();
+            return $listPatients;
+        }
+        catch(PDOException $exception){
+
         }
     }
 }

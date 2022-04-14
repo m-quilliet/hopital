@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     
      //-si formuliare envoyé en post on va faire des choses 
 
-     //-- verifier lastname --
+     //-- verifier lastname -- //recupérer lastname et on nettoie
     $lastname= filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS);//full posait des problémes sur les accent
     if(empty($lastname)){
         $error['lastname']= 'Veuillez saisir votre nom de famille.';
@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         }
     }
     
- 
+
      //-- verifier firstname --
     $firstname= filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS);
     if(empty($firstname)){
