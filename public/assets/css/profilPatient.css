@@ -1,0 +1,105 @@
+:root {
+  --color-1: #052548;
+  --color-2: #EBEEF3;
+  --color-3: #34495E;
+  --color-4: #BD965B;
+}
+
+* {
+    font-family: sans-serif;
+    box-sizing: border-box;
+  }
+  .card {
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    background-color:#34495E;
+    height: 500px;
+    width: 450px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 6px grey;
+    overflow: hidden;
+  }
+  
+  p {
+    color: #EBEEF3;;
+    margin-top: 25px;
+    margin-left: 60px;
+    font-size: 17px;
+    line-height: 1.6;
+    font-family: 'Inconsolata', monospace;
+  }
+  
+  h2 {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+    color: #BD965B;
+    line-height: 1;
+  }
+
+  h3 {
+    margin-top:5px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #BD965B;
+
+  }
+  
+  .header {
+    height: 130px;
+    overflow: hidden;
+    width: 100%;
+    background-image: url('/public/assets/img/gettyimages-910740118-612x612.jpeg');
+    background-size: cover;
+    background-position: bottom;
+  }
+
+  hr{
+  background-color: #EBEEF3;
+  margin-top:-2px;
+  }
+  
+  button {
+    display: block;
+    padding: 1rem 2.5rem;
+    
+    background:var(--color-1);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, var(--color-1), var(--color-3));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, var(--color-1), var(--color-3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+    color: #EBEEF3 !important;
+    outline: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.5s ease-out;
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+  }
+  
+  button span {
+    position: relative;
+    z-index: 2;
+  }
+  button:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background:var(--color-4); 
+    transition: all .35s;
+    border-radius: 5px;
+    outline:none
+  }
+  button:hover {
+    color: var(--color-2);
+  }
+  button:hover:after {
+    width: 100%;
+  }

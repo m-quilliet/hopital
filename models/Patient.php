@@ -110,12 +110,12 @@ class Patient{
             return false;
         }
     }
-        public static function isExist(string $mail):bool{
+    public static function isExist(string $mail):bool{
         try{
             $sql='SELECT `mail`
                 FROM `patients`
                 WHERE `mail`=:mail';
-            $sth= Database::dbConnect()->prepare($sql);
+            $sth= Database::dbConnect()->prepare($sql);// prepare retourne un objet de type pdo statment/para d'entrée c'est une requete
             $sth->bindValue(':mail',$mail, PDO::PARAM_STR);
             $sth->execute();
 
@@ -128,18 +128,66 @@ class Patient{
             return false;
         }
     }
-    public function listPatient():array{
-        try{
+    //on peut faire en static car pas besoin d'hydrater pas besoin d'instenciation
+    //
+    public static function listPatient():array{
+    
             $sql="SELECT * FROM patients";
+
+            try{
             $sth= Database::dbConnect()->query($sql);
-            $listPatients=$sth->fetchAll();
+
+            if(!$sth){//si sth est faux on part direct dans le catch  
+                throw new PDOException();
+            }
+
+            $listPatients=$sth->fetchAll();//fetchall tjr tableau par défaut d'objet appartinent à pdo stmt//si passé ds catch sera un tableau vide ou tableau d'objet
             return $listPatients;
+        
         }
         catch(PDOException $exception){
-
+            //header('location: /controllers/errorController.php?id=2');une solution pour renvoyer sur une page d'erreur
+            return [];// tableau vide si il trouve rien ou se sera notre tableau d'objet
         }
     }
+    public static function getById():array{
+        
+        $sql="SELECT`id` FROM patients";
+        
+        try{
+            $sth= Database::dbConnect()->query($sql);
+            if(!$sth){//si sth est faux on part direct dans le catch  
+                throw new PDOException();
+            }
+            $getById=$sth->fetchAll();//fetchall tjr tableau par défaut d'objet appartinent à pdo stmt//si passé ds catch sera un tableau vide ou tableau d'objet
+            return $getById;
+        
+        }
+        catch(PDOException $exception){
+            //header('location: /controllers/errorController.php?id=2');une solution pour renvoyer sur une page d'erreur
+            return [];
+        }
+    }
+    public static function profilPatient(int $id): object{
+        try{
+            $sql=
+                'SELECT *
+                FROM patients
+                WHERE id = :id';
+            $sth= Database::dbConnect()->prepare($sql);
+            $sth->bindValue(':id',$id,PDO::PARAM_INT);
+
+
+            if ($sth->execute()){
+                return $sth->fetch();
+            }
+
+        }catch(PDOException $exception){
+
+        } 
+    }
 }
+
 
 
                 

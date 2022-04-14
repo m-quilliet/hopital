@@ -13,20 +13,20 @@
                         <th scope="col">Id</th>
                         <th scope="col">Lastname</th>
                         <th scope="col">Firstname</th>
-                        <th scope="col">Birthdate</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Mail</th>
+                        <th scope="col">Infos</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($listPatients as $patient): ?>
+                    <?php foreach($patients as $patient): ?>
                     <tr>
                         <td><?=$patient->id?></td>
-                        <td><?=$patient->lastname?></td>
+                        <td><?=strtoupper($patient->lastname)?></td>
                         <td><?=$patient->firstname?></td>
-                        <td><?=$patient->birthdate?></td>
                         <td><?=$patient->phone?></td>
-                        <td><?=$patient->mail?></td>
+                        <td><a href="mailto: <?= $patient->mail ?>"><?= $patient->mail ?></a></td>
+                        <td><a href="/controllers/profilPatientController.php?id=<?= $patient->id?>"><img src="/public/assets/img/iconEye.png" alt="icone info"></a></td>
                     </tr>
                         <?php endforeach ?>
                     
