@@ -107,11 +107,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 
         if ($addedPatient=== false){
-            $error['addPatient']="Les données n'ont pas été envoyé en base de donnee";
+            $error['addPatient']="Les données n'ont pas été envoyés en base de donnee";
             $className['addPatient']='error';
         }else{
 
-            $error['addPatient']=" Les données sont envoyé avec succés dans la base de données";
+            $error['addPatient']=" Les données sont envoyées avec succés dans la base de données";
             $className['addPatient']='sucess';
         }
     }
