@@ -169,22 +169,65 @@ class Patient{
         }
     }
     public static function profilPatient(int $id): object{
+        
+        $sql=
+        "SELECT *
+        FROM `patients`
+        WHERE id = :id;";
+        
         try{
-            $sql=
-                'SELECT *
-                FROM patients
-                WHERE id = :id';
             $sth= Database::dbConnect()->prepare($sql);
-            $sth->bindValue(':id',$id,PDO::PARAM_INT);
+            $sth->bindValue(':id',$id,PDO::PARAM_INT);//permet affceter les valeurs au marqueur nomitatif ds la requetete qui est :id
+//fait bindvalue => que qd il ya des marqueurs nomitatifs ds la requete!!! empecher injection sql pour la protéger,protéger la requéte
+            $verif=$sth->execute();
+            if (!$verif){// execute la requete preparer avant, execute revoit à un booleann // retourne pas l'objet en lui meme 
+            //fetch ca retourne le premier enregistrement trouvé par la requete
+                throw new PDOException();
+            } else{
+                $patient= $sth-> fetch();
+                if(!$patient){
+                    throw new PDOException('patients non trouvé');
+                }
+                return $patient;
+            }
+        
+        }catch(PDOException $e){
+            return $e; //qui est de type pdo exception
+        } 
+    }
+    public function modifPatient($id){
 
 
-            if ($sth->execute()){
-                return $sth->fetch();
+    $sql = "UPDATE `patients` 
+    SET `lastname` = :lastname, 
+        `firstname` = :firstname,
+        `birthdate`= :birthdate,
+        `phone`= :phone,
+        `mail`= :mail
+    WHERE `id` = :id;";
+
+    
+        try {
+
+                $sth= Database::dbConnect()->prepare($sql);
+
+
+                $sth-> bindValue(':id',$id,PDO::PARAM_INT);
+                $sth-> bindValue(':lastname',$this->getLastname(),PDO::PARAM_STR); // méthode pdo statement 
+                //methode query (juste recuperer de la donnée) qui retourne un objet de type pdo statment =appeler $sth (qui permet d'accéder à des methodes pdo statment)
+                //:lastname= marqueur nomminatif avec ces marqueurs = on prepare,on binValue et on execute
+                $sth-> bindValue(':firstname',$this->getFirstname(),PDO::PARAM_STR);
+                $sth-> bindValue(':birthdate',$this->getBirthdate(),PDO::PARAM_STR);
+                $sth-> bindValue(':phone',$this->getPhone(),PDO::PARAM_STR);
+                $sth-> bindValue(':mail',$this->getMail(),PDO::PARAM_STR);
+
+                return $sth->execute();
+            
+            }catch (PDOException $e){
+
+                return false;
             }
 
-        }catch(PDOException $exception){
-
-        } 
     }
 }
 

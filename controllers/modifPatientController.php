@@ -1,12 +1,19 @@
 <?php
-//depuis controllers comment je fais pr trouver mon fichier regex?
-require_once(dirname(__FILE__).'/../config/regex.php');
+
 //on appelle le modele 
 require_once(dirname(__FILE__).'/../models/Patient.php');
-
+require_once(dirname(__FILE__).'/../config/regex.php');
 
 $stylesheet='addPatient.css';
-$title='Ajouter un nouveau patient';
+$title='Modifier les informations du pateint';
+
+$id = intval(filter_input(INPUT_GET,'id', FILTER_SANITIZE_NUMBER_INT));
+
+$idProfil = Patient::profilPatient($id);
+
+
+
+
  //initialise un tableau d'erreur
 $error=[];
 
@@ -87,28 +94,24 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if ($checktMail===false){
         $error['mail']= 'Veuillez saisir un mail valide';  
     }
-    // var_dump('coucou');
-    // die;
-    if (Patient::isExist($mail)) {
-        $error['mail']= 'L\'adresse mail existe déjà.';    
-    }
-    // var_dump('coucou');
-    // die;
-//-si pas erreur alors on enregistre en base car nettoyer et envoyer en post
+
+
     if(empty($error)){
 
         $patient=new Patient($lastname,$firstname,$birthdate,$phone,$mail);//hydrater notre objet
 
+     
         //apres avoir hydrater le patient on execute la méthode 
     //si bien ajouter en base de donnée je lui indique le message auqual j'ajoute une classe pr s'affichde tel ou tel couleur
-        $addedPatient= $patient->add();
+        $addedPatient= $patient->modifPatient($id);
+
 
         if ($addedPatient=== false){
-            $error['addPatient']="Les données n'ont pas été envoyées en base de donnée";
+            $error['addPatient']="Les données n'ont pas été envoyé en base de donnee";
             $className['addPatient']='error';
         }else{
 
-            $error['addPatient']=" Les données sont envoyées avec succés dans la base de donnée";
+            $error['addPatient']=" Les données sont envoyé avec succés dans la base de données";
             $className['addPatient']='sucess';
         }
     }
@@ -121,4 +124,4 @@ include(dirname(__FILE__).'/../views/templates/header.php');
 include(dirname(__FILE__).'/../views/addPatient.php');
 include(dirname(__FILE__).'/../views/templates/footer.php');
 
-?>
+

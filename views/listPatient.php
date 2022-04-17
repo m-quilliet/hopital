@@ -6,16 +6,16 @@
             </div>
         </div>
 
-        <div class="container table-responsive  py-5"> 
+        <div class="container table-responsive py-3 pb-5"> 
             <table class="table table-bordered table-hover table-success table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Lastname</th>
-                        <th scope="col">Firstname</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Mail</th>
-                        <th scope="col">Infos</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">LASTNAME</th>
+                        <th scope="col">FIRSTNAME</th>
+                        <th scope="col">PHONE</th>
+                        <th scope="col">MAIL</th>
+                        <th scope="col">INFOS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,10 +23,10 @@
                     <tr>
                         <td><?=$patient->id?></td>
                         <td><?=strtoupper($patient->lastname)?></td>
-                        <td><?=$patient->firstname?></td>
+                        <td><?=ucwords($patient->firstname)?></td>
                         <td><?=$patient->phone?></td>
-                        <td><a href="mailto: <?= $patient->mail ?>"><?= $patient->mail ?></a></td>
-                        <td><a href="/controllers/profilPatientController.php?id=<?= $patient->id?>"><img src="/public/assets/img/iconEye.png" alt="icone info"></a></td>
+                        <td><a id="mail" href="mailto: <?= $patient->mail ?>"><?= $patient->mail ?></a></td>
+                        <td><a id="info" href="/controllers/profilPatientController.php?id=<?= $patient->id?>"><img src="/public/assets/img/iconEye.png" alt="icone info"></a></td>
                     </tr>
                         <?php endforeach ?>
                     
@@ -36,7 +36,7 @@
     
         <div class="text-center">
             <a href="/controllers/addPatientController.php">
-                <button type="button" class="btn btn-outline-secondary">Ajouter un patient</button>
+                <button type="submit" class="btn btn-outline-warning text-white"><span> Ajouter un patient</span></button>
             </a>
         </div>
     </div>
