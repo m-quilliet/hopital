@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/public/assets/css/<?=$stylesheet ?? 'style.css' ?>">
     <link rel="stylesheet" href="/public/assets/css/<?=$profilPatient ?? 'style.css' ?>">
     <link rel="stylesheet" href="/public/assets/css/<?=$styleList ?? 'style.css' ?>">
+    <link rel="stylesheet" href="/public/assets/css/<?=$addAppointment ?? 'style.css' ?>">
 
     <title>CLINIQUE JACOBINS</title>
 </head>
@@ -29,10 +30,10 @@
                 <a class="nav-link" href="/controllers/listPatientController.php">Liste patient</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">A</a>
+                <a class="nav-link" href="/controllers/addAppointmentController.php">Prendre un rendez-vous</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">B</a>
+                <a class="nav-link" href="">Liste des rendez-vous</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">C</a>

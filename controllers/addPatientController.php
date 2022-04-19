@@ -56,7 +56,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $checkBirthdate= filter_var (
             $birthdate,
             FILTER_VALIDATE_REGEXP,
-            array("options" =>array("regexp" =>'/' .REGEX_DOB.'/' ))//regex on peux en laisser coté back 
+            array("options" =>array("regexp" =>'/' .REGEX_DATE.'/' ))//regex on peux en laisser coté back 
         );
         if($checkBirthdate === false){
             $error['birthdate']= 'Veuillez saisir une date de naissance valide .';

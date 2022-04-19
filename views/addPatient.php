@@ -4,7 +4,7 @@
             <div class="col-sm-12">
                 <div class="form"> 
                     <form action="<?= isset($_GET['id'])?'?id='.$_GET['id'] : htmlspecialchars($_SERVER['PHP_SELF'])//permet de renseigner ds la meme page tt en encodant les caratéres speciaux ds un soucis de sécurite?>" method="POST" >
-                        <div class="form-title">
+                    <div class="form-title">
                             <span><?=$title?></span>
                             <p class="<?=$className['addPatient'] ?>"><?=$error['addPatient'] ?? ''?></p>
                         </div>
