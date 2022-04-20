@@ -57,9 +57,7 @@ class Appointment
             return $sth->execute(); // retourne excécution de cette requete et va retoirner true ou false
 
         } catch (PDOException $e) {
-            echo $e-> getMessage();
-            die;
-            // return false;
+            return false;
         }
     }
 }
