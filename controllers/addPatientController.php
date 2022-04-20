@@ -62,7 +62,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $error['birthdate']= 'Veuillez saisir une date de naissance valide .';
         }
     }
- 
+
     //--verifier phone --
     $phone= filter_input(INPUT_POST,'phone',FILTER_SANITIZE_NUMBER_INT);//-+ chiffre
     if(!empty($phone))//pas de else car pas obligatoire en front qd pas"required"{
@@ -121,4 +121,3 @@ include(dirname(__FILE__).'/../views/templates/header.php');
 include(dirname(__FILE__).'/../views/addPatient.php');
 include(dirname(__FILE__).'/../views/templates/footer.php');
 
-?>

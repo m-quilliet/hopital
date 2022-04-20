@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/public/assets/css/<?=$stylesheet ?? 'style.css' ?>">
     <link rel="stylesheet" href="/public/assets/css/<?=$profilPatient ?? 'style.css' ?>">
     <link rel="stylesheet" href="/public/assets/css/<?=$styleList ?? 'style.css' ?>">
-    <link rel="stylesheet" href="/public/assets/css/<?=$addAppointment ?? 'style.css' ?>">
+    <link rel="stylesheet" href="/public/assets/css/<?=$addAppointmentPage ?? 'style.css' ?>">
 
     <title>CLINIQUE JACOBINS</title>
 </head>

@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form"> 
-                    <form action="<?= isset($_GET['id'])?'?id='.$_GET['id'] : htmlspecialchars($_SERVER['PHP_SELF'])//permet de renseigner ds la meme page tt en encodant les caratéres speciaux ds un soucis de sécurite?>"novalidate  method="POST" >
+                    <form action="<?= isset($_GET['id'])?'?id='.$_GET['id'] : htmlspecialchars($_SERVER['PHP_SELF'])//permet de renseigner ds la meme page tt en encodant les caratéres speciaux ds un soucis de sécurite?>"  method="POST" >
                     
                         <div class="form-title">
                             <span>Ajouter un rendez-vous</span>
-                            <p></p>
+                            <p class="<?=$className['addAppointment'] ?>"><?=$error['addAppointment'] ?? ''?></p>
                         </div>
 
                         <div class="form-group">
