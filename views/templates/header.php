@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/public/assets/css/<?=$addPatientPage?? 'style.css' ?>">
     <link rel="stylesheet" href="/public/assets/css/<?=$profilAppointmentPage?? 'style.css' ?>">
     <link rel="stylesheet" href="/public/assets/css/<?=$modifAppointementPage?? 'style.css' ?>">
-    
+
 
 
     <title>CLINIQUE JACOBINS</title>
@@ -22,7 +22,7 @@
 
 <body>
 <nav class="navbar navbar-expand-sm navbar-light bg-light"id="test">
-    <a class="navbar-brand" href=""><img class="ms-3"src="/public/assets/img/icons8-stetoscope-icon-64.png">CLINIQUE JACOBINS</a>
+    <a class="navbar-brand" href="/controllers/addPatientController.php"><img class="ms-3"src="/public/assets/img/icons8-stetoscope-icon-64.png">CLINIQUE JACOBINS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"> </span>
     </button>

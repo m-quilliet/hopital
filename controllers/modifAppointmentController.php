@@ -1,11 +1,20 @@
 <?php
-$modifAppointementPage='addAppointment.css';//lien css
+$modifAppointementPage='addAppointmentPage.css';//lien css
 
 require_once(dirname(__FILE__).'/../models/Appointment.php');
+require_once(dirname(__FILE__).'/../models/Patient.php');
+
 require_once(dirname(__FILE__).'/../config/regex.php');
 
 
 $title='Modification du Rendez-vous';
+
+$listPatients= Patient:: listPatient();
+$idAppt= intval(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+$result=Appointment::profilAppointment($idAppt);
+var_dump($result);
+die;
+
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 

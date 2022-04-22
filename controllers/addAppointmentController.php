@@ -6,11 +6,9 @@ require_once(dirname(__FILE__) . '/../models/Patient.php');
 require_once(dirname(__FILE__) . '/../models/Appointment.php');
 
 
-$addAppointmentPage = 'addAppointment.css';
-
+$addAppointmentPage = 'addAppointmentPage.css';
 
 $listPatients = Patient::listPatient();
-
 $title = 'Ajouter un rendez-vous ';
 
 //initialise un tableau d'erreur

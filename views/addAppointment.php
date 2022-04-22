@@ -10,13 +10,19 @@
                             <span><?= $title ?></span>
                             <p class="<?= $className['addAppointment'] ?>"><?= $error['addAppointment'] ?? '' ?></p>
                         </div>
-
                         <div class="form-group">
                             <label for="name">Nom * :</label>
                             <select class="form-select" name="name" aria-label="Default select example" required>
-                                <option value="">Selectionner un Patient :</option>
+                                <option value=" ">Selectionner un Patient :</option>
+
                                 <?php foreach ($listPatients as $patient) : ?>
-                                    <option value="<?= $patient->id ?>"><?= $patient->lastname ?> <?= $patient->firstname ?></option>
+                                    <option value="<?= $patient->id ?>"
+                                    <?php if(isset($listPatients) && isset($result)) { 
+                                        $patient-> id == $result->id ? "selected" : null; 
+                                        } ?>>
+                                    <?=$patient->lastname ?? $result->lastname ?> 
+                                    <?= $patient->firstname ?? $result->firstname ?>
+                                    </option>
                                 <?php endforeach ?>
                             </select>
                             <p class="error"><?= $error['name'] ?? '' ?></p>
@@ -25,13 +31,15 @@
                         <!-- for et id meme orthographe que nos attributs -->
                         <div class="form-group">
                             <label for="date">Date * :</label>
-                            <input name="date" type="date" value="<?= $patient->date ?? $date ?? '' ?>" required class="form-control" min="<?= date('Y-m-d') ?>" id="date">
+                            <input name="date" type="date" value="<?= $result->dateHour ? date ("Y-m-d", strtotime($result->dateHour)):''?>"
+                            required class="form-control" min="<?= date('Y-m-d') ?>" id="date">
                             <p class="error"><?= $error['date'] ?? '' ?></p>
                         </div>
 
                         <div class="form-group">
                             <label for="date">Choix de l'heure * :</label>
-                            <input name="time" pattern="<?= REGEX_TIME ?>" type="time" value="<?= $patient->birthdate ?? $date ?? '' ?>" required class="form-control" min="09:00" max="17:30" id="time">
+                            <input name="time" pattern="<?= REGEX_TIME ?>" type="time" value="<?= $result->dateHour ? date ("H:i",strtotime($result->dateHour)):''?>" 
+                            required class="form-control" min="09:00" max="17:30" id="time">
                             <p class="error"><?= $error['time'] ?? '' ?></p>
                         </div>
 

@@ -151,21 +151,22 @@ class Appointment
 
     //----------------------------Function pour Modifier un rendez-vous----------------------//
 
-    public function modifAppointment($idPatients)
+    public function modifAppointment($id)
     {
         $sql = 'UPDATE  `appointment` 
         SET `dateHour`= :dateHOur,
             `idPatients` = :idPatients,
-        WHERE `idPatients` = :idPatients;';
+        WHERE `id` = :id;';
         try {
-            $sth = Database::dbConnect()->prepare($sql);
+            $sth = $this->_pdo->prepare($sql);
 
-            $sth->bindValue(':id', $idPatients, PDO::PARAM_INT);
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            $sth->bindValue(':idPatients', $this-> getIdPatients(), PDO::PARAM_STR);
             $sth->bindValue(':dateHour', $this->getDateHour(), PDO::PARAM_STR);
 
 
             return $sth->execute();
-        } catch (PDOException $exception) {
+        } catch (PDOException $e) {
             return false;
         }
     }
