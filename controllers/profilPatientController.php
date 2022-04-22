@@ -1,5 +1,5 @@
 <?php
-$profilPatient='profilPatient.css';
+$profilPatientPage='profilPatient.css';
 //on appelle le modele 
 require_once(dirname(__FILE__).'/../models/Patient.php');
 $id = intval(filter_input(INPUT_GET,'id', FILTER_SANITIZE_NUMBER_INT));

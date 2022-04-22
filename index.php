@@ -1,3 +1,3 @@
 <?php 
-    header('location:/controllers/addPatientController.php');
+    header('location:/controllers/homePageController.php');
     die;

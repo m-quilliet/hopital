@@ -8,7 +8,10 @@ require_once(dirname(__FILE__) . '/../models/Appointment.php');
 
 $addAppointmentPage = 'addAppointment.css';
 
-$patients = Patient::listPatient();
+
+$listPatients = Patient::listPatient();
+
+$title = 'Ajouter un rendez-vous ';
 
 //initialise un tableau d'erreur
 $error = [];
@@ -19,81 +22,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //-si formuliare envoyé en post on va faire des choses 
 
-    //-- verifier lastname -- //recupérer lastname et on nettoie
-    $patient = trim(filter_input(INPUT_POST, 'patientSelect', FILTER_SANITIZE_SPECIAL_CHARS)); //full posait des problémes sur les accent
 
+    //vérif du nom
+    $name = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS));
 
-    if (empty($patient)) {
-        $error['patient'] = 'Veuillez saisir un patient.';
+    if (empty($name)) {
+        $error['name'] = 'Veuillez saisir un nom .';
     } else {
-        $checkPatient = filter_var(
-            $patient,
-            FILTER_VALIDATE_INT,
+        $checkName = filter_var(
+            $name,
+            FILTER_VALIDATE_INT
         );
-        if ($checkPatient === false) {
-            $error['patient'] = 'Veuillez saisir un patient existant .';
+        if ($checkName === false) {
+            $error['name'] = 'Veuillez saisir un nom valide .';
         }
     }
-
-
-    //-- verif d --
-    $tripStart = filter_input(INPUT_POST, 'tripStart', FILTER_SANITIZE_NUMBER_INT); //sur une date de naissance car auto +-
-
-    if (empty($tripStart)) {
-        $error['tripStart'] = 'Veuillez saisir un jour de rendez-vous';
+    //vérif de la date 
+    $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_NUMBER_INT);
+    if (empty($date)) {
+        $error['date'] = 'Veuillez saisir une date .';
     } else {
-        $checkTripStart = filter_var(
-            $tripStart,
+        $checkDate = filter_var(
+            $date,
             FILTER_VALIDATE_REGEXP,
-            array("options" => array("regexp" => '/' . REGEX_DATE . '/')) //regex on peux en laisser coté back 
+            array("options" => array("regexp" => '/' . REGEX_DATE . '/'))
         );
-        if ($checkTripStart === false) {
-            $error['tripStart'] = 'Veuillez saisir un jour valide .';
+        if ($checkDate === false) {
+            $error['date'] = 'Veuillez saisir une date valide.';
         }
     }
 
-    $appt = filter_input(INPUT_POST, 'appt', FILTER_SANITIZE_SPECIAL_CHARS); //-+ chiffre
+    //vérif choix de l'heure
 
-    if (empty($appt)) {
-        //pas de else car pas obligatoire en front qd pas"required"{
-        $error['appt'] = 'Veuillez saisir un horaire';
+    $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_SPECIAL_CHARS);
+
+    if (empty($date)) {
+        $error['time'] = 'Veuillez choisir un horaire .';
     } else {
-        $checkAppt = filter_var(
-            $appt,
+        $checkTime = filter_var(
+            $time,
             FILTER_VALIDATE_REGEXP,
             array("options" => array("regexp" => '/' . REGEX_TIME . '/'))
         );
-        if ($checkAppt === false) {
-            $error['appt'] = 'Veuillez saisir un créneau valide.';
+
+        if ($checkTime === false) {
+            $error['time'] = 'Veuillez saisir un horaire valide.';
         }
     }
-    // var_dump($error);
+    $dateHour = $date . ' ' . $time;
+    if (Appointment::isExist($dateHour)) {
+        $error['dateHour'] = 'L\'heure est déja prise !!';
+    }
     if (empty($error)) {
-        $dateHour = $tripStart . ' ' . $appt;
-        $appoint = new Appointment($dateHour, $patient); //hydrater notre objet
-        // $appointment->setidPatients($patient);
-        $addAppointment = $appoint -> addAppointment();
-
-
-
-
-        //apres avoir hydrater le patient on execute la méthode 
-        //si bien ajouter en base de donnée je lui indique le message auqual j'ajoute une classe pr s'affichde tel ou 
-        //tel couleur
-
-        if ($addAppointment === false) {
-            $error['addAppointment'] = "Le rendez-vous n'a pas été envoyé en base de donnée";
-            $className['addAppointment'] = 'error';
+        $appointment = new Appointment($dateHour, $name);
+        $resultAdd = $appointment->addAppointment();
+        //Message de success
+        if ($resultAdd === true) {
+            $error['addAppointment'] = 'Le rendez-vous a bien été enregistré';
+            $className['addAppointment'] = 'success';
         } else {
-            $error['addAppointment'] = " Le rendez-vous est validé avec succés en base de donnée";
-            $className['addAppointment'] = 'sucess';
+            $error['addAppointment'] = 'une erreur est survenue!';
+            $className['addAppointment'] = 'error';
         }
     }
 }
 
 
-//-Appel de la page "Accueil"
 include(dirname(__FILE__) . '/../views/templates/header.php');
-//-ligne qui se relie à la views associée //
 include(dirname(__FILE__) . '/../views/addAppointment.php');
 include(dirname(__FILE__) . '/../views/templates/footer.php');
