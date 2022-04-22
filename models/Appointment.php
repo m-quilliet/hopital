@@ -19,9 +19,10 @@ class Appointment
         $this->_pdo = Database::dbConnect();
     }
 
-    public function getId():int{
+    public function getId(): int
+    {
         return $this->_id;
-        }
+    }
     public function getDateHour(): string
     {
         return $this->_dateHour;
@@ -31,7 +32,8 @@ class Appointment
         return $this->_idPatients;
     }
 
-    public function setId(int $id):void{
+    public function setId(int $id): void
+    {
         $this->_id = $id;
     }
     public function setDateHour(string $dateHour): void
@@ -67,8 +69,9 @@ class Appointment
     }
 
 
-    public static function listAppointment():array{
-        $sql= "SELECT
+    public static function listAppointment(): array
+    {
+        $sql = "SELECT
         `appointments`.`id` AS `idAppointment`,
                 `appointments`.`dateHour` AS `dateHour`,
                 `patients`.`lastname` AS `lastname`,
@@ -77,19 +80,18 @@ class Appointment
                 FROM `appointments`
                 JOIN `patients`
                 ON `patients`.`id` = `appointments`.`idPatients`;";
-                
-        
-        try{
-            
-            $sth= Database::dbConnect()->query($sql);
+
+
+        try {
+
+            $sth = Database::dbConnect()->query($sql);
             if (!$sth) {
-                throw new PDOException ();
+                throw new PDOException();
             }
 
             return $sth->fetchAll();
-        }
-        catch(PDOException $exception){
-            return[];
+        } catch (PDOException $exception) {
+            return [];
         }
     }
     //-------------------------Function is Exist "gére les doublons"----------------------------//
@@ -109,7 +111,7 @@ class Appointment
             } else {
                 return true;
             }
-        } catch (PDOException $exception) {
+        } catch (PDOException $e) {
             return false;
         }
     }

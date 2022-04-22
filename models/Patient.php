@@ -105,7 +105,7 @@ class Patient
     {
         try {
             //insérer une requetes sql   
-            $sth = $this->_pdo->prepare(//->query va exécuter la requete // nous on veux réparer la requéte en vue de lui affecter des valeurs derrrieres     
+            $sth = $this->_pdo->prepare( //->query va exécuter la requete // nous on veux réparer la requéte en vue de lui affecter des valeurs derrrieres     
                 "INSERT INTO `patients`(`lastname`, `firstname`, `birthdate`, `phone`, `mail`) 
                 VALUES (:lastname,:firstname,:birthdate,:phone,:mail)"
             );
