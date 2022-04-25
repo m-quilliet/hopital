@@ -138,12 +138,12 @@ class Appointment
             if (!$verif) {
                 throw new PDOException();
             } else {
-                $idPatients = $sth->fetch();
+                $idAppointments = $sth->fetch();
             }
-            if (!$idPatients) {
+            if (!$idAppointments) {
                 throw new PDOException('Patient non trouvé');
             }
-            return $idPatients;
+            return $idAppointments;
         } catch (PDOException $exception) {
             return $exception;
         }
@@ -153,21 +153,56 @@ class Appointment
 
     public function modifAppointment($id)
     {
-        $sql = 'UPDATE  `appointment` 
-        SET `dateHour`= :dateHOur,
-            `idPatients` = :idPatients,
+        $sql = 'UPDATE  `appointments` 
+        SET `dateHour`= :dateHour,
+            `idPatients` = :idPatients
         WHERE `id` = :id;';
+
         try {
             $sth = $this->_pdo->prepare($sql);
 
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
-            $sth->bindValue(':idPatients', $this-> getIdPatients(), PDO::PARAM_STR);
+            $sth->bindValue(':idPatients', $this->getIdPatients(), PDO::PARAM_STR);
             $sth->bindValue(':dateHour', $this->getDateHour(), PDO::PARAM_STR);
 
 
             return $sth->execute();
         } catch (PDOException $e) {
-            return false;
+            // return false;
+            echo $e->getMessage();
         }
     }
+    public function getAllApptById(): array
+    {
+        $sql = "SELECT `id` , `dateHour` ,`idPatients` 
+            FROM `appointments`
+            WHERE`idPatients`= :idPatients;";
+
+        try {
+
+            $sth = $this->_pdo->prepare($sql);
+            $sth->bindValue(':idPatients',$this->_idPatients ,PDO::PARAM_INT);
+
+            if ($sth->execute() ){
+            return  $sth->fetchAll();
+            }
+            
+            } catch (PDOException $e) {
+            return ['error'];
+        }
+    }
+    // public function deleteAppoitment():
+    // {
+    //     $sql= "DELETE `idAppoitment`
+    //         FROM `appoitments`;";
+
+    //     try{
+    //         $sth= $this->_pdo->prepare($sql);
+    //         $sth->bindValue(':idAppointment',$this->_idAppointment, PDO::PARAM_STR);
+            
+
+    //     } catch (PDOException $e) {
+    //         return ['error'];
+    //     }
+    // }
 }

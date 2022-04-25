@@ -2,6 +2,7 @@
 
 //on appelle le modele 
 require_once(dirname(__FILE__) . '/../models/Patient.php');
+require_once(dirname(__FILE__) . '/../models/Appointment.php');
 require_once(dirname(__FILE__) . '/../config/regex.php');
 
 $stylesheet = 'addPatient.css';
@@ -10,6 +11,7 @@ $title = 'Modifier les informations du pateint';
 $id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 
 $idProfil = Patient::profilPatient($id);
+
 
 
 

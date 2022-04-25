@@ -31,6 +31,9 @@ a:hover {
 #info{
   cursor:-webkit-zoom-in;
 }
+#delete{
+  height: auto;
+}
 
 
 button {

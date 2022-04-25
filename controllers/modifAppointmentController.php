@@ -10,16 +10,12 @@ require_once(dirname(__FILE__).'/../config/regex.php');
 $title='Modification du Rendez-vous';
 
 $listPatients= Patient:: listPatient();
-$idAppt= intval(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
-$result=Appointment::profilAppointment($idAppt);
-var_dump($result);
-die;
+$idAppointment= intval(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+$result=Appointment::profilAppointment($idAppointment);
 
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
-    
-    
     //vérif du nom
     $name= trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS));
 
@@ -76,9 +72,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if (empty($error)) {
         $appointment = new Appointment($dateHour,$name);
 
-        $resultModif = $appointment->modifAppointment($idPatients);
+        $resultModif = $appointment->modifAppointment($idAppointment);
 //Message de success
-    if ($resultAdd === true){
+    if ($resultModif === true){
         $error['addAppointment']= 'Le rendez-vous a bien été enregistré';
         $className['addAppointment']='success';
     }else{

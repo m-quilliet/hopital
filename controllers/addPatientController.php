@@ -87,13 +87,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if ($checktMail===false){
         $error['mail']= 'Veuillez saisir un mail valide';  
     }
-    // var_dump('coucou');
-    // die;
+
     if (Patient::isExist($mail)) {
         $error['mail']= 'L\'adresse mail existe déjà.';    
     }
-    // var_dump('coucou');
-    // die;
+
 //-si pas erreur alors on enregistre en base car nettoyer et envoyer en post
     if(empty($error)){
 

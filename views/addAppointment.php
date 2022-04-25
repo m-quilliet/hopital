@@ -12,16 +12,17 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Nom * :</label>
+
                             <select class="form-select" name="name" aria-label="Default select example" required>
                                 <option value=" ">Selectionner un Patient :</option>
 
-                                <?php foreach ($listPatients as $patient) : ?>
+                                <?php foreach ($listPatients as $patient) :                                     ?>
                                     <option value="<?= $patient->id ?>"
-                                    <?php if(isset($listPatients) && isset($result)) { 
-                                        $patient-> id == $result->id ? "selected" : null; 
-                                        } ?>>
-                                    <?=$patient->lastname ?? $result->lastname ?> 
-                                    <?= $patient->firstname ?? $result->firstname ?>
+                                    <?php if(isset($patient) && isset($result)) {?> 
+                                        <?=$patient-> id == $result->id ? "selected" : null?> 
+                                       <?php } ?>>
+                                    <?=$patient->lastname ?? $result->lastname ?? '' ?> 
+                                    <?= $patient->firstname ?? $result->firstname ?? '' ?>
                                     </option>
                                 <?php endforeach ?>
                             </select>

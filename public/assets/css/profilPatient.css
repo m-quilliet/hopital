@@ -14,11 +14,11 @@
     margin-top: 40px;
     margin-bottom: 30px;
     background-color:#34495E;
-    height: 500px;
+    height: auto;
     width: 450px;
     border-radius: 10px;
     box-shadow: 4px 4px 6px grey;
-    overflow: hidden;
+ 
   }
   
   p {
@@ -65,7 +65,7 @@
   button {
     display: block;
     padding: 1rem 2.5rem;
-    
+    margin-bottom: 1.5rem;
     background:var(--color-1);  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, var(--color-1), var(--color-3));  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, var(--color-1), var(--color-3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

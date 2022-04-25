@@ -4,24 +4,32 @@
 <?php if (empty ($errorMessage)){?> 
     <div class="card">
 
-   
+
         <div class="header"></div>
         <div>
             <h2><?=ucwords($idProfil->lastname) ?></h2>
             <h3><?=ucwords($idProfil->firstname) ?></h3>
             <hr><hr>
             <p>Date de Naissance : <?= $idProfil->birthdate ?></p>
-            <p>N° de téléphone : <?= $idProfil->phone ?></p>
-            <p>Adresse Mail : <?= $idProfil->mail ?></p>
+            <p>N° de téléphone :<a href="tel" <?= $idProfil->phone ?>></a></p>
+            <p>Adresse Mail :<a href="mailto" <?= $idProfil->mail ?>></a></p>
+            <hr>
+            <h3><small>Rendez-vous</small></h3>
+            <?php foreach ($allApptById as $result) : ?>
+            <hr>
+            <p>Date :<?= date('d/m/Y', strtotime($result->dateHour))?? '' ?></p>
+            <p>Heure :<?= date('H:i', strtotime($result->dateHour))?? '' ?></p>
+            <?php endforeach ?>
         </div>
-     
+
         <div class="text-center">
             <a href="/controllers/modifPatientController.php?id=<?= $idProfil->id?>">
             <button type="button" class="btn btn-outline-warning"><span> Modifier les informations </span></button>
             </a>
         </div>
     </div>
-    <?php } ?>
+    <?php 
+} ?>
 </section>
 
 
