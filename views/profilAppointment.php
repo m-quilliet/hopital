@@ -13,7 +13,7 @@
                     <p>Heure: <?= date('H:i', strtotime($idPatients->dateHour)) ?? '' ?></p>
                 </div>
                 <div class="text-center">
-                    <a href="/controllers/modifAppointmentController.php?id=<?= $idPatients->id ?>">
+                    <a href="/controllers/modifAppointmentController.php?id=<?= $idPatients->idAppointment ?>">
                         <button type="button" class="btn btn-outline-warning"><span> Modifier les informations </span></button>
                     </a>
                 </div>
