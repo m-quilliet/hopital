@@ -26,7 +26,7 @@
                             <td><?= date('d/m/Y', strtotime($appointment->dateHour)) ?></td>
                             <td><?= date('H:i', strtotime($appointment->dateHour)) ?></td>
                             <td><a id="info" href="/controllers/profilAppointmentController.php?id=<?= $appointment->idAppointment ?>"><img src="/public/assets/img/iconEye.png" alt="icone info"></a></td>
-                            <td><a id="delete" href=""><img src="/public/assets/img/delete-30.png"></a></td>
+                            <td><a id="delete" href="/controllers/deleteAppointmentController.php?id=<?= $appointment->idAppointment?>"><img src="/public/assets/img/delete-30.png"></a></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

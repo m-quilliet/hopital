@@ -15,12 +15,13 @@ if($idProfil instanceof PDOException){
     $errorMessage= $idProfil->getMessage();
 }
 $idAppointment= intval(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
-$result=Appointment::profilAppointment($idAppointment);
+$result=Appointment::getOneById($idAppointment);
 
 $appointment= new Appointment('',$id);
 
 
 $allApptById= $appointment-> getAllApptById();
+// $deleteAppt= $appointment-> deleteAppoitment();
 
 
 

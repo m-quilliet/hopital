@@ -118,7 +118,7 @@ class Appointment
 
     //------------------------Function Affiche profil Rendez-vous------------------------//
 
-    public static function profilAppointment(int $idPatients): object
+    public static function getOneById(int $id): object
     {
         $sql = "SELECT
                 `appointments`.`id` AS `idAppointment`,
@@ -129,21 +129,21 @@ class Appointment
                 FROM `appointments`
                 JOIN `patients`
                 ON `patients`.`id` = `appointments`.`idPatients`
-                WHERE `appointments`.`id` = :idPatients;";
+                WHERE `appointments`.`id` = :id;";
         try {
             $sth = Database::dbConnect()->prepare($sql);
-            $sth->bindValue(':idPatients', $idPatients, PDO::PARAM_INT);
-            $verif = $sth->execute();
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            $verif = $sth->execute();//retourne un bool
 
             if (!$verif) {
                 throw new PDOException();
             } else {
-                $idAppointments = $sth->fetch();
+                $appointment = $sth->fetch();
             }
-            if (!$idAppointments) {
-                throw new PDOException('Patient non trouvé');
+            if (!$appointment) {
+                throw new PDOException('rdz-vs non trouvé');
             }
-            return $idAppointments;
+            return $appointment;
         } catch (PDOException $exception) {
             return $exception;
         }
@@ -151,7 +151,7 @@ class Appointment
 
     //----------------------------Function pour Modifier un rendez-vous----------------------//
 
-    public function modifAppointment($id)
+    public function modifAppointment($id): bool
     {
         $sql = 'UPDATE  `appointments` 
         SET `dateHour`= :dateHour,
@@ -162,14 +162,14 @@ class Appointment
             $sth = $this->_pdo->prepare($sql);
 
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
-            $sth->bindValue(':idPatients', $this->getIdPatients(), PDO::PARAM_STR);
+            $sth->bindValue(':idPatients', $this->getIdPatients(), PDO::PARAM_INT);
             $sth->bindValue(':dateHour', $this->getDateHour(), PDO::PARAM_STR);
 
 
             return $sth->execute();
         } catch (PDOException $e) {
-            // return false;
-            echo $e->getMessage();
+            return false;
+
         }
     }
     public function getAllApptById(): array
@@ -191,18 +191,26 @@ class Appointment
             return ['error'];
         }
     }
-    // public function deleteAppoitment():
-    // {
-    //     $sql= "DELETE `idAppoitment`
-    //         FROM `appoitments`;";
+    public static function deleteAppointment($idAppointment):bool
+    {
+        $sql= "DELETE 
+            FROM `appointments`
+            WHERE `id`=:id;";
 
-    //     try{
-    //         $sth= $this->_pdo->prepare($sql);
-    //         $sth->bindValue(':idAppointment',$this->_idAppointment, PDO::PARAM_STR);
-            
-
-    //     } catch (PDOException $e) {
-    //         return ['error'];
-    //     }
-    // }
+        try{
+            $sth= Database::dbConnect()->prepare($sql);
+            $sth->bindValue(':id',$idAppointment, PDO::PARAM_INT); 
+            return $sth ->execute();
+        } catch (PDOException $e) {
+                return $e;
+            }
+        }
 }
+
+// $statement = $pdo->prepare($sql);
+
+
+// // execute the statement
+// if ($statement->execute()) {
+// 	echo 'publisher id ' . $publisher_id . ' was deleted successfully.';
+// }

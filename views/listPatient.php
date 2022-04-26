@@ -15,7 +15,8 @@
                         <th scope="col">FIRSTNAME</th>
                         <th scope="col">PHONE</th>
                         <th scope="col">MAIL</th>
-                        <th scope="col">INFOS</th>
+                        <th scope="col">FICHE</th>
+                        <th scope="col">SUPP</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,7 @@
                         <td><?=$patient->phone?></td>
                         <td><a id="mail" href="mailto: <?= $patient->mail ?>"><?= $patient->mail ?></a></td>
                         <td><a id="info" href="/controllers/profilPatientController.php?id=<?= $patient->id?>"><img src="/public/assets/img/iconEye.png" alt="icone info"></a></td>
+                        <td><a id="delete" href="/controllers/listPatientController.php?id="<?= $patient->id?>><img src="/public/assets/img/delete-30.png"></a></td>
                     </tr>
                         <?php endforeach ?>
                     

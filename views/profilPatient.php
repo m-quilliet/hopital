@@ -11,8 +11,8 @@
             <h3><?=ucwords($idProfil->firstname) ?></h3>
             <hr><hr>
             <p>Date de Naissance : <?= $idProfil->birthdate ?></p>
-            <p>N° de téléphone :<a href="tel" <?= $idProfil->phone ?>></a></p>
-            <p>Adresse Mail :<a href="mailto" <?= $idProfil->mail ?>></a></p>
+            <p>N° de téléphone :<a class="text-light text-decoration-none" href="tel: <?= $idProfil->phone ?>"> <?=$idProfil->phone?></a></p>
+            <p>Adresse Mail :<a class="text-light text-decoration-none" href="mailto: <?= $idProfil->mail ?>"> <?=$idProfil->mail?></a></p>
             <hr>
             <h3><small>Rendez-vous</small></h3>
             <?php foreach ($allApptById as $result) : ?>

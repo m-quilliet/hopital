@@ -3,6 +3,10 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form">
+                    <?php 
+                    if(isset($errorMsg)){
+                        echo $errorMsg;
+                    } else{?>
                     <form action="<?= isset($_GET['id']) ? '?id=' . $_GET['id'] : htmlspecialchars($_SERVER['PHP_SELF']) //permet de renseigner ds la meme page tt en encodant les caratéres speciaux ds un soucis de sécurite
                                     ?>" method="POST">
 
@@ -16,11 +20,11 @@
                             <select class="form-select" name="name" aria-label="Default select example" required>
                                 <option value=" ">Selectionner un Patient :</option>
 
-                                <?php foreach ($listPatients as $patient) :                                     ?>
+                                <?php foreach ($listPatients as $patient) :?>
                                     <option value="<?= $patient->id ?>"
                                     <?php if(isset($patient) && isset($result)) {?> 
                                         <?=$patient-> id == $result->id ? "selected" : null?> 
-                                       <?php } ?>>
+                                    <?php } ?>>
                                     <?=$patient->lastname ?? $result->lastname ?? '' ?> 
                                     <?= $patient->firstname ?? $result->firstname ?? '' ?>
                                     </option>
@@ -42,10 +46,13 @@
                             <input name="time" pattern="<?= REGEX_TIME ?>" type="time" value="<?= $result->dateHour ? date ("H:i",strtotime($result->dateHour)):''?>" 
                             required class="form-control" min="09:00" max="17:30" id="time">
                             <p class="error"><?= $error['time'] ?? '' ?></p>
+                            <p class="error"><?= $error['dateHour'] ?? '' ?></p>
                         </div>
 
                         <button type="submit" class="btn btn-outline-warning text-white"><span> Valider le rendez-vous </span></button>
                     </form>
+                    <?php } ?>
+
 
                 </div>
             </div>
