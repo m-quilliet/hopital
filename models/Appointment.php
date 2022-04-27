@@ -191,26 +191,21 @@ class Appointment
             return ['error'];
         }
     }
-    public static function deleteAppointment($idAppointment):bool
-    {
-        $sql= "DELETE 
-            FROM `appointments`
-            WHERE `id`=:id;";
-
-        try{
-            $sth= Database::dbConnect()->prepare($sql);
-            $sth->bindValue(':id',$idAppointment, PDO::PARAM_INT); 
-            return $sth ->execute();
-        } catch (PDOException $e) {
-                return $e;
+    
+        public static function deleteAppt($idAppointment):bool
+        {
+            $sql= "DELETE 
+                FROM `appointments`
+                WHERE `id`=:id;";
+    
+            try{
+                $sth= Database::dbConnect()->prepare($sql);
+                $sth->bindValue(':id',$idAppointment, PDO::PARAM_INT); 
+                return $sth ->execute();
+            } catch (PDOException $e) {
+                    return $e;
+                }
             }
-        }
+
 }
-
-// $statement = $pdo->prepare($sql);
-
-
-// // execute the statement
-// if ($statement->execute()) {
-// 	echo 'publisher id ' . $publisher_id . ' was deleted successfully.';
-// }
+    
