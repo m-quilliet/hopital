@@ -242,13 +242,13 @@ class Patient
             return false;
         }
     }
-    public static function deleteApptPatient($idAppointment): bool {
+    public static function deleteApptPatient($idAppt): bool {
         $sql='DELETE
         FROM `patients`
         WHERE `id`=:id;';
         try{
             $sth=Database:: dbConnect()->prepare($sql);
-            $sth->bindValue(':id',$idAppointment, PDO::PARAM_INT);
+            $sth->bindValue(':id',$idAppt, PDO::PARAM_INT);
             return $sth-> execute();
         } catch (PDOException $e){
             return false;   

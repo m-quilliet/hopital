@@ -9,4 +9,5 @@ if(!empty($_GET)){
         $appointment= new Appointment();
         $appointment  -> deleteAppt($idAppt);
      header ('location: /controllers/listAppointmentController.php');
+     die;
 }

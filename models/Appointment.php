@@ -133,7 +133,7 @@ class Appointment
         try {
             $sth = Database::dbConnect()->prepare($sql);
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
-            $verif = $sth->execute();//retourne un bool
+            $verif = $sth->execute(); //retourne un bool
 
             if (!$verif) {
                 throw new PDOException();
@@ -169,7 +169,6 @@ class Appointment
             return $sth->execute();
         } catch (PDOException $e) {
             return false;
-
         }
     }
     public function getAllApptById(): array
@@ -181,31 +180,47 @@ class Appointment
         try {
 
             $sth = $this->_pdo->prepare($sql);
-            $sth->bindValue(':idPatients',$this->_idPatients ,PDO::PARAM_INT);
+            $sth->bindValue(':idPatients', $this->_idPatients, PDO::PARAM_INT);
 
-            if ($sth->execute() ){
-            return  $sth->fetchAll();
+            if ($sth->execute()) {
+                return  $sth->fetchAll();
             }
-            
-            } catch (PDOException $e) {
+        } catch (PDOException $e) {
             return ['error'];
         }
     }
-    
-        public static function deleteAppt($idAppointment):bool
-        {
-            $sql= "DELETE 
-                FROM `appointments`
-                WHERE `id`=:id;";
-    
-            try{
-                $sth= Database::dbConnect()->prepare($sql);
-                $sth->bindValue(':id',$idAppointment, PDO::PARAM_INT); 
-                return $sth ->execute();
-            } catch (PDOException $e) {
-                    return $e;
-                }
-            }
+    public static function deleteAppt($idAppt): bool
+    {
+        $sql = "DELETE 
+            FROM `appointments`
+            WHERE `id`=:id;";
 
+        try {
+            $sth = Database::dbConnect()->prepare($sql);
+            $sth->bindValue(':id', $idAppt, PDO::PARAM_INT);
+            return $sth->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+    public static function deleteByPatient($idAppt): bool
+    {
+
+        $sql = 'DELETE
+        FROM `appointments`
+        WHERE `idPatients`= :id;';
+
+        try {
+
+            $sth = Database::dbConnect()->prepare($sql);
+
+            $sth->bindValue(':id', $idAppt, PDO::PARAM_INT);
+
+            return $sth->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
-    

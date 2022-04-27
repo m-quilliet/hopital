@@ -7,7 +7,7 @@
         </div>
 
         <div class="container table-responsive py-3 pb-5"> 
-            <table class="table table-bordered table-hover table-success table-striped" data-toggle="table" data-search="true">
+            <table class="table table-bordered table-hover table-success table-striped" data-toggle="table" data-search="true"data-pagination="true" data-page-list="[10, 25, 50, 100, ALL]" data-pagination-pre-text="Last" data-pagination-next-text="Next">
                 <thead>
                     <tr>
                         <th data-sortable="true" scope="col">ID</th>
