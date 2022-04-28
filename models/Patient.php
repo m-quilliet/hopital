@@ -146,20 +146,20 @@ class Patient
     }
     //on peut faire en static car pas besoin d'hydrater pas besoin d'instenciation
     //
-    public static function listPatient(): array
-    {
-
-        $sql = "SELECT * FROM patients";
-
+    public static function listPatient(string $search=''):array{
+       $sql = "SELECT * FROM `patients`
+        WHERE `lastname`
+        LIKE :search
+        OR `firstname`
+        Like :search;";
         try {
-            $sth = Database::dbConnect()->query($sql);
-
-            if (!$sth) { //si sth est faux on part direct dans le catch  
+            $sth = Database::dbConnect()->prepare($sql);
+            $sth->bindValue(':search','%'.$search.'%');
+            if (!$sth){ //si sth est faux on part direct dans le catch  
                 throw new PDOException();
+            }if ($sth->execute()){
+                return $sth->fetchAll();
             }
-
-            $listPatients = $sth->fetchAll(); //fetchall tjr tableau par défaut d'objet appartinent à pdo stmt//si passé ds catch sera un tableau vide ou tableau d'objet
-            return $listPatients;
         } catch (PDOException $exception) {
             //header('location: /controllers/errorController.php?id=2');une solution pour renvoyer sur une page d'erreur
             return []; // tableau vide si il trouve rien ou se sera notre tableau d'objet

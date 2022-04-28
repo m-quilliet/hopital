@@ -6,6 +6,12 @@ require_once(dirname(__FILE__).'/../models/Patient.php');
 $styleList='listPatient.css';
 
 $patients = Patient::listPatient(); //car c'est une méthode static(::) (met le nom de la méthode)
+if(isset($_POST ['search'])){
+    $search=trim(filter_input(INPUT_POST,'search', FILTER_SANITIZE_SPECIAL_CHARS));
+    $patients = Patient::listPatient($search); //car c'est une méthode static(::) (met le nom de la méthode)
+}
+
+
 
 
 
