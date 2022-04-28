@@ -146,19 +146,20 @@ class Patient
     }
     //on peut faire en static car pas besoin d'hydrater pas besoin d'instenciation
     //
-    public static function listPatient(string $search=''):array{
+    public static function listPatient(string $search='')//paramaitre d'entree optionnel = ''(vide)
+    :array{
        $sql = "SELECT * FROM `patients`
         WHERE `lastname`
         LIKE :search
         OR `firstname`
         Like :search;";
         try {
-            $sth = Database::dbConnect()->prepare($sql);
-            $sth->bindValue(':search','%'.$search.'%');
+            $sth = Database::dbConnect()->prepare($sql);//marqueur nominatif donc prepare binvalue execute
+            $sth->bindValue(':search','%'.$search.'%');//remet paramétre d'entree ds le bind
             if (!$sth){ //si sth est faux on part direct dans le catch  
                 throw new PDOException();
             }if ($sth->execute()){
-                return $sth->fetchAll();
+                return $sth->fetchAll();//fetchall appa a pdo statment
             }
         } catch (PDOException $exception) {
             //header('location: /controllers/errorController.php?id=2');une solution pour renvoyer sur une page d'erreur
@@ -254,5 +255,10 @@ class Patient
             return false;   
         }
     }
-    
+    public function pagination(){
+        $sql='SELECT* 
+        FROM` patients`
+        LIMIT 10;';
+
+    }
 }

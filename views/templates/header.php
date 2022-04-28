@@ -43,9 +43,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/controllers/listAppointmentController.php">Liste Rdz-vs</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">C</a>
-            </li>
         </ul>
     </div>
 </nav>

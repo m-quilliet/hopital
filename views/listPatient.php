@@ -8,19 +8,19 @@
 
         <div class="container table-responsive py-3 pb-5"> 
             <form action=""method=POST>
-                <input type="search" placeholder="Rechercher un patient" name="search">
-                <input type="submit" value="recherche" >
+                <input type="search" placeholder="Rechercher un patient" name="search" value="<?= $search ?? ''?>">
+                <input type="submit" value="rechercher">
             </form>
             <table class="table table-bordered table-hover table-success table-striped" data-toggle="table" >
                 <thead>
                     <tr>
-                        <th data-sortable="true" scope="col">ID</th>
-                        <th data-sortable="true" scope="col">LASTNAME</th>
-                        <th data-sortable="true" scope="col">FIRSTNAME</th>
-                        <th data-sortable="true" scope="col">PHONE</th>
-                        <th data-sortable="true" scope="col">MAIL</th>
-                        <th data-sortable="true" scope="col">FICHE</th>
-                        <th data-sortable="true" scope="col">SUPP</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">LASTNAME</th>
+                        <th scope="col">FIRSTNAME</th>
+                        <th scope="col">PHONE</th>
+                        <th scope="col">MAIL</th>
+                        <th scope="col">FICHE</th>
+                        <th scope="col">SUPP</th>
                     </tr>
                 </thead>
                 <tbody>

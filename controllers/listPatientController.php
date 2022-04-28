@@ -3,17 +3,15 @@
 //on appelle le modele 
 require_once(dirname(__FILE__).'/../models/Patient.php');
 
+
 $styleList='listPatient.css';
 
 $patients = Patient::listPatient(); //car c'est une méthode static(::) (met le nom de la méthode)
 if(isset($_POST ['search'])){
-    $search=trim(filter_input(INPUT_POST,'search', FILTER_SANITIZE_SPECIAL_CHARS));
+    $search=trim(filter_input(INPUT_POST,'search', FILTER_SANITIZE_SPECIAL_CHARS));//recupére input search de notre formulaire
+    //
     $patients = Patient::listPatient($search); //car c'est une méthode static(::) (met le nom de la méthode)
 }
-
-
-
-
 
 
 //-Appel de la page "Accueil"
