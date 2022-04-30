@@ -4,6 +4,9 @@
     --color-3: #34495E;
     --color-4: #BD965B;
   }
+body{
+  -webkit-tap-highlight-color: #BD965B !important;
+}
 h1{
   color:#BD965B;
 }
@@ -13,7 +16,7 @@ table{
 }
 th{
   color:#BD965B;
-text-shadow: 1.2px 1.2px #34495E ;
+  text-shadow: 1.2px 1.2px #34495E ;
   font-size: x-large;
 }
 td{
@@ -27,7 +30,14 @@ a {
 a:hover {
   color:#34495E;
   }
-
+#phone{
+  color:#34495E;
+  text-decoration:none;  
+  cursor:default;
+}
+#phone:hover{
+  color:#BD965B;
+}
 #info{
   cursor:-webkit-zoom-in;
 }
@@ -35,52 +45,41 @@ a:hover {
   height: auto;
 }
 .page-link {
-
   color: #BD965B;
   text-decoration: none;
   background-color: #34495E;
 }
- 
-
-
-button {
-    display: block;
-    padding: 1rem 2.5rem;
-    background:var(--color-1); 
-    background: -webkit-linear-gradient(to right, var(--color-1), var(--color-3));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, var(--color-1), var(--color-3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #EBEEF3 !important;
-    outline: none;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: 0.5s ease-out;
-    position: relative;
-    border-radius: 2rem;
-    overflow: hidden;
-  }
-  
-  button span {
-    position: relative;
-    z-index: 2;
-  }
-
-  button:after {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background:var(--color-4); 
-    transition: all .35s;
-    border-radius: 5px;
-    outline:none;
+  .btn{
+    color:#BD965B;
+    border-color: #BD965B;
+    background-color: #EBEEF3;
   }
   button:hover {
-    color:#EBEEF3 !important;
+    color:  #EBEEF3!important;
+    background-color: #BD965B;
   }
 
-  button:hover:after {
-    width: 100%;
+  #pagination{
+    color:#BD965B !important;
+    border-color: #BD965B;
+    background-color: #EBEEF3 !important;
   }
+  #pagination:hover{
+    background-color: #BD965B !important;
+    color: #EBEEF3 !important;
+  }
+input{
+  color:#BD965B;
+  border-color: #BD965B;
+  border-style:solid;
+  border-radius:5px;
+  margin-bottom: 1px;
+  height: 35px;
+}
+
+#search:hover{
+  background-color: #fff;
+
+}
+
+

@@ -11,7 +11,7 @@ $modifAppointementPage = 'addAppointmentPage.css'; //lien css
 
 $title = 'Modification du Rendez-vous';
 
-$listPatients = Patient::listPatient();
+$listPatients = Patient::listPatients();
 $idAppointment = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 $result = Appointment::getOneById($idAppointment);
 

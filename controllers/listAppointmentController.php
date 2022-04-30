@@ -3,7 +3,7 @@
 //on appelle le modele 
 require_once(dirname(__FILE__).'/../models/Appointment.php');
 
-$styleList='listPatient.css';
+$listApptPage='listApptPage.css';
 
 $listAppointment = Appointment::listAppointment(); //car c'est une méthode static(::) (met le nom de la méthode)
 

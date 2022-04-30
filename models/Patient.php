@@ -146,26 +146,34 @@ class Patient
     }
     //on peut faire en static car pas besoin d'hydrater pas besoin d'instenciation
     //
-    public static function listPatient(string $search='')//paramaitre d'entree optionnel = ''(vide)
-    :array{
-       $sql = "SELECT * FROM `patients`
-        WHERE `lastname`
+
+    public static function listPatients(string $search = '', $patientsPerPage = 99, $offset = 0): array
+    {  // indiquer tout de suite ce que ça va retourner (ici un array)
+        $sql = 'SELECT * FROM patients 
+        WHERE lastname 
         LIKE :search
-        OR `firstname`
-        Like :search;";
+        OR firstname
+        LIKE :search
+        LIMIT :offset,:patientsPerPage;';
         try {
-            $sth = Database::dbConnect()->prepare($sql);//marqueur nominatif donc prepare binvalue execute
-            $sth->bindValue(':search','%'.$search.'%');//remet paramétre d'entree ds le bind
-            if (!$sth){ //si sth est faux on part direct dans le catch  
+            $sth = Database::dbConnect()->prepare($sql); //marqueur nominatif donc prepare binvalue execute
+            $sth->bindValue(':search', "%$search%"); //remet paramétre d'entree ds le bind
+            $sth->bindValue(':patientsPerPage', $patientsPerPage, PDO::PARAM_INT);
+            $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
+            if (!$sth) { //si sth est faux on part direct dans le catch  
                 throw new PDOException();
-            }if ($sth->execute()){
-                return $sth->fetchAll();//fetchall appa a pdo statment
+            }
+            if ($sth->execute()) {
+                return $sth->fetchAll(); //fetchall appa a pdo statment
             }
         } catch (PDOException $exception) {
             //header('location: /controllers/errorController.php?id=2');une solution pour renvoyer sur une page d'erreur
             return []; // tableau vide si il trouve rien ou se sera notre tableau d'objet
         }
     }
+
+
+
     public static function getById(): array
     {
 
@@ -212,8 +220,6 @@ class Patient
     }
     public function modifPatient($id)
     {
-
-
         $sql = "UPDATE `patients` 
     SET `lastname` = :lastname, 
         `firstname` = :firstname,
@@ -243,22 +249,23 @@ class Patient
             return false;
         }
     }
-    public static function deleteApptPatient($idAppt): bool {
-        $sql='DELETE
+    public static function deleteApptPatient($idAppt): bool
+    {
+        $sql = 'DELETE
         FROM `patients`
         WHERE `id`=:id;';
-        try{
-            $sth=Database:: dbConnect()->prepare($sql);
-            $sth->bindValue(':id',$idAppt, PDO::PARAM_INT);
-            return $sth-> execute();
-        } catch (PDOException $e){
-            return false;   
+        try {
+            $sth = Database::dbConnect()->prepare($sql);
+            $sth->bindValue(':id', $idAppt, PDO::PARAM_INT);
+            return $sth->execute();
+        } catch (PDOException $e) {
+            return false;
         }
     }
-    public function pagination(){
-        $sql='SELECT* 
-        FROM` patients`
-        LIMIT 10;';
-
+    public static function count()
+    {
+        $sql = "SELECT COUNT(`id`) AS `nb_patients` FROM `patients`;";
+        $sth = Database::dbConnect()->query($sql);
+        return $sth->fetch();
     }
 }

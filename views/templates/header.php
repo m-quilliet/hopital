@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/public/assets/css/<?=$addPatientPage?? 'style.css' ?>">
     <link rel="stylesheet" href="/public/assets/css/<?=$profilAppointmentPage?? 'style.css' ?>">
     <link rel="stylesheet" href="/public/assets/css/<?=$modifAppointementPage?? 'style.css' ?>">
+    <link rel="stylesheet" href="/public/assets/css/<?=$listApptPage?? 'style.css' ?>">
 
 
 
@@ -32,16 +33,16 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul class="navbar-nav ms-auto me-4 fs-5">
             <li class="nav-item">
-                <a class="nav-link" href="/controllers/addPatientController.php">Ajout patient</a>
+                <a class="nav-link" href="/controllers/addPatientController.php">Ajout Patient</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/controllers/listPatientController.php">Liste patient</a>
+                <a class="nav-link" href="/controllers/listPatientController.php">Liste des Patients</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/controllers/addAppointmentController.php">Prendre un rendez-vous</a>
+                <a class="nav-link" href="/controllers/addAppointmentController.php">Prendre un Rendez-vous</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/controllers/listAppointmentController.php">Liste Rdz-vs</a>
+                <a class="nav-link" href="/controllers/listAppointmentController.php">Liste des Rendez-vous</a>
             </li>
         </ul>
     </div>
